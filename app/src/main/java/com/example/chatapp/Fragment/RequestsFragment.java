@@ -50,7 +50,7 @@ public class RequestsFragment extends Fragment
         // Required empty public constructor
     }
 
-
+    //get all request
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class RequestsFragment extends Fragment
         return RequestsFragmentView;
     }
 
-
+    //truy xuat tat ca user va status .
     @Override
     public void onStart()
     {
@@ -334,7 +334,7 @@ public class RequestsFragment extends Fragment
     }
 
 
-
+    //truy xuat other user send request to current ưser
     public static class RequestsViewHolder extends RecyclerView.ViewHolder
     {
         TextView userName, userStatus;

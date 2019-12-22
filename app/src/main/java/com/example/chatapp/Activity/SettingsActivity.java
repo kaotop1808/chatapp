@@ -114,12 +114,12 @@ public class SettingsActivity extends AppCompatActivity
 
 
 
-
+    //send media (hinh anh toi db FB)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-
+        //chon anh tu galerry hoac chup anh
         if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
         {
             Uri ImageUri = data.getData();
@@ -129,7 +129,7 @@ public class SettingsActivity extends AppCompatActivity
                     .setAspectRatio(1, 1)
                     .start(this);
         }
-
+        //cat anh
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
         {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -143,7 +143,7 @@ public class SettingsActivity extends AppCompatActivity
 
                 Uri resultUri = result.getUri();
 
-
+                //gui anh tu Extened Stored
                 final StorageReference filePath = UserProfileImagesRef.child(currentUserID + ".jpg");
 
                 filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {

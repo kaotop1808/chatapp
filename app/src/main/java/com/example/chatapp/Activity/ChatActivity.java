@@ -64,7 +64,7 @@ public class ChatActivity extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void onCreate(Bundle savedInstanceState) //Khoi tao Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
@@ -74,15 +74,15 @@ public class ChatActivity extends AppCompatActivity
         messageSenderID = mAuth.getCurrentUser().getUid();
         RootRef = FirebaseDatabase.getInstance().getReference();
 
-
+        //get intent thong qua key values bang method put get string extra
         messageReceiverID = getIntent().getExtras().get("visit_user_id").toString();
         messageReceiverName = getIntent().getExtras().get("visit_user_name").toString();
         messageReceiverImage = getIntent().getExtras().get("visit_image").toString();
 
 
-        IntializeControllers();
+        IntializeControllers(); //khoi tao toolbar
 
-
+        //set text cua curent user va get lai info vua gui
         userName.setText(messageReceiverName);
         Picasso.get().load(messageReceiverImage).placeholder(R.drawable.profile_image).into(userImage);
 
@@ -93,7 +93,7 @@ public class ChatActivity extends AppCompatActivity
             {
                 SendMessage();
             }
-        });
+        }); //chay su kien send message
 
 
         DisplayLastSeen();
@@ -101,7 +101,7 @@ public class ChatActivity extends AppCompatActivity
 
 
 
-
+    //khoi tao toolbar
     private void IntializeControllers()
     {
         ChatToolBar = (Toolbar) findViewById(R.id.chat_toolbar);
@@ -129,7 +129,7 @@ public class ChatActivity extends AppCompatActivity
         userMessagesList.setLayoutManager(linearLayoutManager);
         userMessagesList.setAdapter(messageAdapter);
 
-
+        //lay ngay thang nam hien tai
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
@@ -141,12 +141,12 @@ public class ChatActivity extends AppCompatActivity
 
 
 
-    private void DisplayLastSeen()
-    {
+    private void DisplayLastSeen() // get info last seen cua user
+    {   //Neu user offiline. Se kiem tra va set thong tin seen thanh last seen thong qua status dang nhap
         RootRef.child("Users").child(messageReceiverID)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot)
+                    public void onDataChange(DataSnapshot dataSnapshot) //
                     {
                         if (dataSnapshot.child("userState").hasChild("state"))
                         {

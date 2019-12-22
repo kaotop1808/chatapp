@@ -44,9 +44,9 @@ public class RegisterActivity extends AppCompatActivity
         RootRef = FirebaseDatabase.getInstance().getReference();
 
 
-        InitializeFields();
+        InitializeFields(); //khoi tao toolbar
 
-
+        //kiem tra neu da dang ky xong thi chuyen toi trang login
         AlreadyHaveAccountLink.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity
 
 
 
-    private void CreateNewAccount()
+    private void CreateNewAccount() //tao account ms
     {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();

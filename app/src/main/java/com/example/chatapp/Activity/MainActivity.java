@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //get current user
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null){
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         }
         RootRef = FirebaseDatabase.getInstance().getReference();
 
-
+        //get toolbar view and all message
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("SMS");
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
-
+        //kiem tra va update trang thai user
         if (currentUser == null)
         {
             SendUserToLoginActivity();
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    private void VerifyUserExistance()
+    private void VerifyUserExistance() //get data user via snapshot. lay du lieu theo kieu json
     {
         String currentUserID = mAuth.getCurrentUser().getUid();
 
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
+    public boolean onCreateOptionsMenu(Menu menu) //khoi tao menu
     {
         super.onCreateOptionsMenu(menu);
 
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
+    public boolean onOptionsItemSelected(MenuItem item) //set status theo option tuy chon
     {
         super.onOptionsItemSelected(item);
 
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity
         onlineStateMap.put("time", saveCurrentTime);
         onlineStateMap.put("date", saveCurrentDate);
         onlineStateMap.put("state", state);
-
+        //set status tuong ung cho currentUser
         RootRef.child("Users").child(currentUserID).child("userState")
                 .updateChildren(onlineStateMap);
 

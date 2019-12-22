@@ -44,7 +44,7 @@ public class ContactsFragment extends Fragment
         // Required empty public constructor
     }
 
-
+    //get all list contact
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class ContactsFragment extends Fragment
     public void onStart()
     {
         super.onStart();
-
+        //get all contact + user status and time
         FirebaseRecyclerOptions options =
                 new FirebaseRecyclerOptions.Builder<Contacts>()
                 .setQuery(ContacsRef, Contacts.class)

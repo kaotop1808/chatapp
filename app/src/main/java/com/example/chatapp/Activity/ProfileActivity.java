@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-
+        //get info user and display toolbar button
         mAuth = FirebaseAuth.getInstance();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         ChatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
@@ -66,18 +66,19 @@ public class ProfileActivity extends AppCompatActivity
 
 
 
-    private void RetrieveUserInfo()
+    private void RetrieveUserInfo() //truy xuat thong tin profile user
     {
         UserRef.child(receiverUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+                //kiem tra user co ton tai hay ko va get values cua no kem anh
                 if ((dataSnapshot.exists())  &&  (dataSnapshot.hasChild("image")))
                 {
                     String userImage = dataSnapshot.child("image").getValue().toString();
                     String userName = dataSnapshot.child("name").getValue().toString();
                     String userstatus = dataSnapshot.child("status").getValue().toString();
-
+                    //load img
                     Picasso.get().load(userImage).placeholder(R.drawable.profile_image).into(userProfileImage);
                     userProfileName.setText(userName);
                     userProfileStatus.setText(userstatus);
@@ -87,6 +88,7 @@ public class ProfileActivity extends AppCompatActivity
                 }
                 else
                 {
+                    //neu user ko ton tai. Yeu cau nhap thong tin user
                     String userName = dataSnapshot.child("name").getValue().toString();
                     String userstatus = dataSnapshot.child("status").getValue().toString();
 
@@ -109,7 +111,7 @@ public class ProfileActivity extends AppCompatActivity
 
 
 
-    private void ManageChatRequests()
+    private void ManageChatRequests() //gui request add frend to chat
     {
         ChatRequestRef.child(senderUserID)
                 .addValueEventListener(new ValueEventListener() {
@@ -171,7 +173,7 @@ public class ProfileActivity extends AppCompatActivity
                 });
 
 
-
+        //neu user la new thi display option send request
         if (!senderUserID.equals(receiverUserID))
         {
             SendMessageRequestButton.setOnClickListener(new View.OnClickListener() {
@@ -207,7 +209,7 @@ public class ProfileActivity extends AppCompatActivity
 
 
 
-    private void RemoveSpecificContact()
+    private void RemoveSpecificContact() //get thong tin ng dung da remove.
     {
         ContactsRef.child(senderUserID).child(receiverUserID)
                 .removeValue()

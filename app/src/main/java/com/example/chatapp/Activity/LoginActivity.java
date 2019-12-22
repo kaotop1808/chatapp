@@ -39,14 +39,14 @@ public class LoginActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        //xac dinh user login va lay thong tin user
         mAuth = FirebaseAuth.getInstance();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
 
-        InitializeFields();
+        InitializeFields(); // init toolbar
 
-
+        //send new current user register to RegisterActivity
         NeedNewAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity
             }
         });
 
-
+        //action login. Send values to firebase and check
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity
             loadingBar.setMessage("Please wait....");
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
-
+            //check login info
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity
 
 
 
-    private void SendUserToMainActivity()
+    private void SendUserToMainActivity() //add user login thong qua flag
     {
         Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

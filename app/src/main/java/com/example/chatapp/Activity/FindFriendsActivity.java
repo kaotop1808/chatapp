@@ -26,7 +26,7 @@ public class FindFriendsActivity extends AppCompatActivity
 {
     private Toolbar mToolbar;
     private RecyclerView FindFriendsRecyclerList;
-    private DatabaseReference UsersRef;
+    private DatabaseReference UsersRef; //referent toi db cua firebase thong qua UsersRef
 
 
     @Override
@@ -35,10 +35,10 @@ public class FindFriendsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
 
-
+        // Truy cap den user ref tu current user
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-
+        //select list user status
         FindFriendsRecyclerList = (RecyclerView) findViewById(R.id.find_friends_recycler_list);
         FindFriendsRecyclerList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -55,12 +55,12 @@ public class FindFriendsActivity extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
-
+        //select list user status
         FirebaseRecyclerOptions<Contacts> options =
                 new FirebaseRecyclerOptions.Builder<Contacts>()
                 .setQuery(UsersRef, Contacts.class)
                 .build();
-
+        //get info contact
         FirebaseRecyclerAdapter<Contacts, FindFriendViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Contacts, FindFriendViewHolder>(options) {
                     @Override
@@ -106,7 +106,7 @@ public class FindFriendsActivity extends AppCompatActivity
         TextView userName, userStatus;
         CircleImageView profileImage;
 
-
+        //truy xuat trang thai contact voi tung user
         public FindFriendViewHolder(@NonNull View itemView)
         {
             super(itemView);

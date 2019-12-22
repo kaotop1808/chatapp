@@ -51,7 +51,7 @@ public class ChatsFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // set chat ve trang thai public
         PrivateChatsView = inflater.inflate(R.layout.fragment_chats, container, false);
 
 
@@ -63,7 +63,7 @@ public class ChatsFragment extends Fragment
         ChatsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-
+        //get chat list
         chatsList = (RecyclerView) PrivateChatsView.findViewById(R.id.chats_list);
         chatsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -166,7 +166,7 @@ public class ChatsFragment extends Fragment
 
 
 
-
+    //get chat view profile
     public static class  ChatsViewHolder extends RecyclerView.ViewHolder
     {
         CircleImageView profileImage;
